@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    tools:context=".Ui.LoginActivity">
+
+        <ImageButton
+            android:id="@+id/buttonLogin"
+            android:layout_width="117dp"
+            android:layout_height="47dp"
+            android:backgroundTint="@android:color/transparent"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:srcCompat="@drawable/common_google_signin_btn_text_light" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign In"
+            android:textColor="#020202"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonLogin"
+            app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
+            app:layout_constraintHorizontal_bias="0.64"
+            app:layout_constraintStart_toStartOf="@+id/buttonLogin"
+            app:layout_constraintTop_toTopOf="@+id/buttonLogin" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/disney_logo"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="222dp"
+            android:layout_height="94dp"
+            android:backgroundTint="#000000"
+            android:text="Bienvenido a disneyWiki"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

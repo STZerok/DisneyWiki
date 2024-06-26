@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1023299875167",
+    "project_id": "disneywiki-61b8d",
+    "storage_bucket": "disneywiki-61b8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023299875167:android:d967b1837a04a7d2b9c6ea",
+        "android_client_info": {
+          "package_name": "ar.edu.disneywiki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023299875167-oe9513i72bduvbvrnpra9df1t1cvv4v0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ar.edu.disneywiki",
+            "certificate_hash": "c2e57f303112f9de42ce8a35f787c60013997732"
+          }
+        },
+        {
+          "client_id": "1023299875167-h143k0i6fggg12eguk7haciafmd4dih6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvCylV2fJhRf1yTwGuDE1Y7mSAuz8lvC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023299875167-h143k0i6fggg12eguk7haciafmd4dih6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
