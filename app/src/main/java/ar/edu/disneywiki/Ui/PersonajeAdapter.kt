@@ -61,6 +61,7 @@ class PersonajeAdapter : RecyclerView.Adapter<PersonajesViewHolder>() {
         }
         notifyDataSetChanged()
     }
+
     fun actualizarFavoritos(nuevaLista: List<Personaje>) {
         items = nuevaLista.toMutableList()
         notifyDataSetChanged()

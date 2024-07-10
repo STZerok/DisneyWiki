@@ -8,6 +8,7 @@ import ar.edu.disneywiki.Data.DBLocal.toPersonajeList
 import ar.edu.disneywiki.Data.DBLocal.toPersonajeLocal
 import ar.edu.disneywiki.Data.DBLocal.toPersonajeLocalList
 import ar.edu.disneywiki.Model.Personaje
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.tasks.await
@@ -38,7 +39,8 @@ class PersonajeDataSource {
         return if (result.isSuccessful) {
             val persList = result.body()?.data ?: ArrayList()
             if (persList.isNotEmpty()) {
-                dbLocal.PersonajeDAO().insertPersonaje(*persList.toPersonajeLocalList().toTypedArray())
+                dbLocal.PersonajeDAO()
+                    .insertPersonaje(*persList.toPersonajeLocalList().toTypedArray())
             }
             persList
         } else {
@@ -67,24 +69,30 @@ class PersonajeDataSource {
     }
 
     suspend fun guardarPersonajeFav(id: Int, context: Context): Boolean {
+        val user = FirebaseAuth.getInstance().currentUser ?: return false
+        val uid = user.uid
         return try {
-            val documento = db.collection("Fav").document(id.toString()).get().await()
+            val documento =
+                db.collection("users").document(uid).collection("favorites").document(id.toString())
+                    .get().await()
             if (documento.exists()) {
                 actualizarFavoritoLocal(context, id, false)
-                db.collection("Fav").document(id.toString()).delete().await()
-                false // Se quitó de favoritos
+                db.collection("users").document(uid).collection("favorites").document(id.toString())
+                    .delete().await()
+                false
             } else {
                 val result = api.getPersonaje(id).execute()
                 if (result.isSuccessful) {
                     result.body()?.data?.fav = true
-                    db.collection("Fav").document(id.toString()).set(result.body()!!.data).await()
-                    true // Se agregó a favoritos
+                    db.collection("users").document(uid).collection("favorites")
+                        .document(id.toString()).set(result.body()!!.data).await()
+                    true
                 } else {
-                    false // Error al obtener el personaje de la API
+                    false
                 }
             }
         } catch (e: Exception) {
-            false // Error al acceder a Firebase
+            false
         }
     }
 
@@ -93,10 +101,15 @@ class PersonajeDataSource {
         dbLocal.PersonajeDAO().updateIsFav(id, isFav)
     }
 
+
     suspend fun getPersonajesFav(): ArrayList<Personaje> {
+        val user = FirebaseAuth.getInstance().currentUser ?: return arrayListOf()
+        val uid = user.uid
+
         return suspendCoroutine { continuation ->
-            db.collection("Fav").get()
+            db.collection("users").document(uid).collection("favorites").get()
                 .addOnSuccessListener { documentos ->
+                    // Si la operación es exitosa, mapea los documentos a objetos Personaje y retorna la lista
                     val personajes = documentos.mapNotNull { documento ->
                         documento.toObject(Personaje::class.java)
                     } as ArrayList<Personaje>
@@ -107,4 +120,6 @@ class PersonajeDataSource {
                 }
         }
     }
+
+
 }

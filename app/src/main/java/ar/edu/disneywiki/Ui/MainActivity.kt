@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 adapter.filter(newText)
-
                 return true
             }
         })
